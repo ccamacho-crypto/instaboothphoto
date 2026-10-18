@@ -1,0 +1,137 @@
+{
+  "hero": {
+    "headline": "It's Party Time!",
+    "subheadline": "Let us help capture the wacky characters at your next event. Our photo booths will make your next event a hit!",
+    "cta": "Book Us",
+    "galleryLink": "See your event gallery →",
+    "tags": [
+      "Weddings",
+      "Mitzvahs",
+      "Anniversaries",
+      "Parties"
+    ]
+  },
+  "features": {
+    "heading": "Interactive Photo Booths",
+    "intro": "Instabooth Photo is a company dedicated to making your next event a hit with everyone. With the latest software, our booths will be customized specifically for your event.",
+    "items": [
+      {
+        "id": "feat-1",
+        "title": "Unlimited Prints",
+        "description": "You have the option of between a 4×6 or 2×6 strip custom designed photo prints to suit your next event."
+      },
+      {
+        "id": "feat-2",
+        "title": "Animated GIFs",
+        "description": "Our state of the art software lets you create an animated GIF of the shots you take as well."
+      },
+      {
+        "id": "feat-3",
+        "title": "Video Messages",
+        "description": "In our booths, we don't just stop with stills. You will have options for video messages, a great addition for a wedding booth."
+      },
+      {
+        "id": "feat-4",
+        "title": "Online Gallery",
+        "description": "Included in all packages, we will save and upload every single shot, GIF and video message to your own online gallery."
+      }
+    ]
+  },
+  "pricing": {
+    "heading": "Photo Booth Packages",
+    "subtext": "Choose your ideal package. We can also customize any packages for special events. Day rates available for multi day events.",
+    "packages": [
+      {
+        "id": "pkg-wedding",
+        "name": "Wedding Package",
+        "price": "$700",
+        "duration": "4hr Minimum",
+        "description": "Event package includes a booth technician. 4hr minimum rental rate. Optional location move included. Custom designs available.",
+        "features": [
+          "unlimited prints",
+          "4×6 or 2×6 strips",
+          "one custom background design",
+          "custom wedding props",
+          "animated GIFs",
+          "social media shareable",
+          "video messages"
+        ],
+        "featured": false,
+        "cta": "More Info"
+      },
+      {
+        "id": "pkg-event",
+        "name": "Event Package",
+        "price": "$560",
+        "duration": "3hr Minimum",
+        "description": "Event package includes a booth technician. 3hr minimum rental rate. Custom designs available.",
+        "features": [
+          "unlimited prints",
+          "4×6 or 2×6 strips",
+          "one custom background design",
+          "animated GIFs",
+          "social media shareable",
+          "standard photo booth props"
+        ],
+        "featured": true,
+        "cta": "More Info"
+      },
+      {
+        "id": "pkg-company",
+        "name": "360 Video Booth",
+        "price": "$950",
+        "duration": "4hr Minimum",
+        "description": "360 video booth includes 2 booth technicians. 4hr minimum rental rate. Custom designs available.",
+        "features": [
+          "custom video frames",
+          "online gallery with all vides",
+          "one custom background design",
+          "animated GIFs",
+          "social media shareable",
+          "lighting included"
+        ],
+        "featured": false,
+        "cta": "More Info"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Book Your Booth Today!",
+    "subtext": "Booking Info",
+    "submitLabel": "Book us"
+  },
+  "footer": {
+    "tagline": "Making your next event a hit!",
+    "copyright": "2016 © INSTABOOTH PHOTO™ All Rights Reserved.",
+    "quickLinks": [
+      {
+        "id": "fl-1",
+        "label": "Home",
+        "href": "#"
+      },
+      {
+        "id": "fl-2",
+        "label": "Features",
+        "href": "#features"
+      },
+      {
+        "id": "fl-3",
+        "label": "Gallery",
+        "href": "https://memoryfactory.smugmug.com/Instabooth-Photo/Instabooth-Photo"
+      },
+      {
+        "id": "fl-4",
+        "label": "Pricing",
+        "href": "#pricing"
+      },
+      {
+        "id": "fl-5",
+        "label": "Book Us",
+        "href": "#booking"
+      }
+    ],
+    "phone": "786.205.3985",
+    "email": "info@instaboothphoto.com",
+    "address": "8865 SW 131 Street, Miami, FL 33176"
+  }
+}
