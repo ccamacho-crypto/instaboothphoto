@@ -24,6 +24,172 @@ export interface SsrRenderResult {
 	redirect?: string;
 }
 
+/** Stands in for the route when the request failed before Express matched one. */
+const UNROUTED: string = "(unrouted)";
+
+/**
+ * Names the route a request reached, never the target it asked for.
+ *
+ * A request target carries visitor data: a path segment can be an address
+ * (`/signup/victim@example.com`) and a parameterized route holds a customer id, so
+ * `req.baseUrl + req.path` logged both. `docs/privacy/pii.md` asks for the route
+ * template instead — the string this app registered, which is fixed text.
+ *
+ * There is deliberately no fallback to `req.path` or `req.originalUrl`: a request
+ * that matched no route has no template, and the placeholder is the honest answer.
+ * The mount prefix is also omitted, because `req.baseUrl` is the resolved mount
+ * rather than a template, so appending it would put request-derived text back.
+ */
+export function routeLabel(req: Request): string {
+	const route: unknown = (req as { route?: unknown }).route;
+	if (typeof route !== "object" || route === null) {
+		return UNROUTED;
+	}
+	const template: unknown = (route as { path?: unknown }).path;
+	if (typeof template === "string") {
+		return template;
+	}
+	// The SSR catch-all route is registered with a RegExp path, so `path` is a RegExp.
+	// The source is text this app wrote, so it is as fixed as a string template.
+	if (template instanceof RegExp) {
+		return template.source;
+	}
+	// A route registered with an array of paths has no single template.
+	return UNROUTED;
+}
+
+/** Frames worth logging. Enough to name the throwing line and its caller. */
+const MAX_LOGGED_FRAMES: number = 5;
+
+/**
+ * The call frames of an error, with its message removed.
+ *
+ * `stack` is the message with the frames appended, so the message has to come
+ * off before any of it is logged. It is removed by its own length rather than by
+ * looking for where the frames begin, because a message can contain anything:
+ * body-parser puts a prefix of the request body into a parse failure's message,
+ * and a visitor can put newlines and text shaped like a frame in that body.
+ * Cutting an exact `name: message` prefix leaves only what the runtime wrote.
+ *
+ * Anything that does not have that exact prefix — a `stack` reassigned by a
+ * library, or a `name` or `message` changed after the error was constructed —
+ * reports no frames at all, so an unrecognised shape loses debuggability rather
+ * than logging an unknown string.
+ */
+function loggedFrames(err: Error): string[] {
+	if (typeof err.stack !== "string") {
+		return [];
+	}
+	const headline: string = err.message ? `${err.name}: ${err.message}` : err.name;
+	if (!err.stack.startsWith(headline)) {
+		return [];
+	}
+	return err.stack
+		.slice(headline.length)
+		.split("\n")
+		.filter((line: string): boolean => /^\s+at \S/.test(line))
+		.slice(0, MAX_LOGGED_FRAMES)
+		.map((line: string): string => line.trim());
+}
+
+/**
+ * Reduces an error to fields that cannot carry request content.
+ *
+ * express.json() puts a prefix of the raw request body into a SyntaxError's
+ * message, so the message is not safe to log on a request path: a form-encoded
+ * body posted to a JSON route begins with the visitor's own field values. The
+ * error class, plus body-parser's `type` and `status`, names the failure without
+ * quoting what the client sent, and {@link loggedFrames} takes the frames out of
+ * `stack` without the message that `stack` begins with.
+ *
+ * The message is dropped rather than gated on dev, because production is where a
+ * customer app is actually debugged, so a dev-only escape hatch would not be
+ * read. The frames are kept and the message is not: a frame names a file, a
+ * function and a line the runtime itself recorded, while the message is the only
+ * part an error carries that can quote what arrived in the request.
+ */
+export function toLogError(err: unknown): Record<string, unknown> {
+	const shaped: Record<string, unknown> = {
+		name: err instanceof Error ? err.name : typeof err,
+	};
+	const fields: Record<string, unknown> =
+		typeof err === "object" && err !== null ? (err as Record<string, unknown>) : {};
+	if (typeof fields.type === "string") {
+		shaped.type = fields.type;
+	}
+	if (typeof fields.code === "string" || typeof fields.code === "number") {
+		shaped.code = fields.code;
+	}
+	if (typeof fields.status === "number") {
+		shaped.status = fields.status;
+	}
+	if (err instanceof Error) {
+		const frames: string[] = loggedFrames(err);
+		if (frames.length > 0) {
+			shaped.frames = frames;
+		}
+	}
+	return shaped;
+}
+
+/**
+ * Error handler for /api routes. Exported so tests can mount it on their own app
+ * in the order Express requires (error middleware after the routes it protects).
+ */
+export const apiErrorHandler = (
+	err: unknown,
+	req: Request,
+	res: Response,
+	_next: NextFunction,
+): void => {
+	// Always respond JSON on /api so clients parsing response.json() don't
+	// receive Express's default HTML error page for non-Error throws.
+	console.error("ssr.api.error", {
+		route: routeLabel(req),
+		error: toLogError(err),
+	});
+	res.status(500).json({ error: "Internal server error" });
+};
+
+/**
+ * Last handler in the stack, for paths outside /api. Without it Express's default
+ * handler runs, which writes err.stack to stderr and — whenever NODE_ENV is not
+ * "production" — into the response body.
+ */
+export const finalErrorHandler = (
+	err: unknown,
+	req: Request,
+	res: Response,
+	// Unused, but Express identifies error middleware by arity: a 3-parameter
+	// function is registered as an ordinary handler and never sees an error.
+	_next: NextFunction,
+): void => {
+	console.error("ssr.request.failed", {
+		route: routeLabel(req),
+		error: toLogError(err),
+	});
+	if (res.headersSent) {
+		// The response is already streaming, so there is no status left to set and no
+		// body to replace. Forwarding to Express's default handler would hand it the
+		// unsanitized error, which it writes to stderr as a raw stack — the leak this
+		// handler exists to close. Destroying the socket instead aborts the partial
+		// response, so the client sees a truncated transfer rather than a body that
+		// looks complete. The log line above has already recorded the failure.
+		res.destroy();
+		return;
+	}
+	// Preserve the status Express's default handler would have chosen, so a
+	// malformed body still answers 400 rather than 500.
+	const rawStatus: unknown =
+		typeof err === "object" && err !== null
+			? ((err as { status?: unknown; statusCode?: unknown }).status ??
+				(err as { statusCode?: unknown }).statusCode)
+			: undefined;
+	const status: number =
+		typeof rawStatus === "number" && rawStatus >= 400 && rawStatus <= 599 ? rawStatus : 500;
+	res.status(status).type("text/plain").send("Internal Server Error");
+};
+
 export function registerAdSenseTextRoutes(app: Express, config: AdSenseRuntimeConfig): void {
 	app.get("/ads.txt", (_req, res) => {
 		const content = resolveAdSenseTextFile(config, "adsTxt");
@@ -92,15 +258,7 @@ app.get("/api/health", health__get);
 
 // Error middleware must be registered AFTER the routes it protects; Express
 // only passes errors to middleware defined later in the stack.
-app.use("/api", (err: unknown, req: Request, res: Response, _next: NextFunction) => {
-	// Always respond JSON on /api so clients parsing response.json() don't
-	// receive Express's default HTML error page for non-Error throws.
-	console.error("ssr.api.error", {
-		url: req.url,
-		error: err instanceof Error ? err.stack : String(err),
-	});
-	res.status(500).json({ error: "Internal server error" });
-});
+app.use("/api", apiErrorHandler);
 
 function baseUrl(req: Request): string {
 	return `${req.protocol}://${req.hostname}`;
@@ -282,7 +440,7 @@ if (import.meta.env.PROD) {
 				// User-visible 404 / error pages should come from a route
 				// errorElement, not from this fallback path.
 				console.error("ssr.render.error-response", {
-					url: req.url,
+					route: routeLabel(req),
 					status: result.status,
 				});
 				res
@@ -317,15 +475,20 @@ if (import.meta.env.PROD) {
 			// page as success. console.error (not warn) puts it at the right log
 			// level for the observability pipeline to alert on.
 			console.error("ssr.render.failed", {
-				url: req.url,
-				// Log the full stack — React's renderToString annotates it with
-				// the failing component's call tree, which the message alone
-				// discards.
-				error: err instanceof Error ? err.stack : String(err),
-			});
+					route: routeLabel(req),
+					// The stack is dropped even though React annotates it with the failing
+					// component tree. A route component or loader throws messages it builds
+					// itself, so a thrown value can quote a query parameter or a submitted
+					// field, and the message is embedded in the stack. The component tree is
+					// not worth sending request data to a shared log.
+					error: toLogError(err),
+				});
 			sendFallback();
 		}
 	});
+
+	// Last in the stack, so it sees any error the routes above pass on.
+	app.use(finalErrorHandler);
 
 	const shutdown = async (signal: string) => {
 		console.log(`Got ${signal}, shutting down gracefully...`);
