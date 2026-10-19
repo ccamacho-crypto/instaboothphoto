@@ -46,3 +46,16 @@ The ZIP included references to Airo-hosted image/video assets, but those binary 
 - 360 Video Booth: $950 (4-hour minimum)
 
 Please confirm pricing, contact details, and claims such as “500+ Events Captured” before going live.
+
+## Supplied media assets (October 2026 update)
+
+The supplied `ibp web assets.zip` media has now been included locally in `assets/media/`:
+- Instabooth horizontal logo in header and footer; supplied favicon.
+- `section-1-background.jpg` as hero image.
+- All six `gallery-slide-*.jpg` photos in the gallery strip.
+- Photo assets for feature and section backgrounds.
+- Animated GIF demonstration video in the Animated GIFs feature card.
+- 360 booth demonstration video in the 360 Video feature card.
+- Additional supplied `primary.png`, `vertical.png`, and `features-corporate.png` are retained in the media folder for later use.
+
+Both videos autoplay muted and loop when browser settings permit; the 360 video is large (~48 MB), so optimize it if bandwidth or load speed is a concern. No remote image host is required for these sections. The Formspree ID still needs configuring.
