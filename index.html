@@ -1,28 +1,85 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <script>
-      (function () {
-        try {
-          var u = new URL(location.href);
-          if (u.searchParams.has('airoShareToken')) {
-            u.searchParams.delete('airoShareToken');
-            history.replaceState(null, '', u.toString());
-          }
-        } catch (e) {}
-      })();
-    </script>
-    <meta name="referrer" content="same-origin" />
-    <link rel="icon" type="image/png" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--app-head-->
-    <script src="/airo-video-slots.js"></script>
-    <script src="/airo-logo-orientation.js"></script>
-  </head>
-  <body class="fs-unmask-airo-app-builder">
-    <div id="app" class="fs-unmask-airo-app-builder"><!--app-html--></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script src="/analytics.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Miami and Florida photo booth rentals for weddings, mitzvahs, anniversaries, parties and corporate events. Unlimited prints, GIFs, video messages and online galleries.">
+  <meta name="theme-color" content="#e91e8c">
+  <title>Instabooth Photo — Miami Photo Booth Rental for Weddings & Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Instabooth Photo home"><span class="brand-mark">i<span>•</span></span><span class="brand-name">instabooth <b>PHOTO</b></span></a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#features">Features</a><a href="#pricing">Pricing</a><a href="https://memoryfactory.smugmug.com/Instabooth-Photo/Instabooth-Photo" target="_blank" rel="noopener">Gallery</a><a class="nav-cta" href="#booking">Book Us</a>
+    </nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-photo" role="img" aria-label="Guests celebrating at an event"></div><div class="hero-shade"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <div class="tags"><span>Weddings</span><span>Mitzvahs</span><span>Anniversaries</span><span>Parties</span></div>
+          <h1>It's Party<br><em>Time!</em></h1>
+          <p>Let us help capture the wacky characters at your next event. Our photo booths will make your next event a hit!</p>
+          <div class="hero-actions"><a class="button" href="#booking">Book Us</a><a class="text-link" href="https://memoryfactory.smugmug.com/Instabooth-Photo/Instabooth-Photo" target="_blank" rel="noopener">See your event gallery <span>›</span></a></div>
+        </div>
+        <div class="hero-stats"><div><strong>500+</strong><span>Events Captured</span></div><div><strong>Orlando to Miami, FL</strong><span>Based &amp; Serving Florida</span></div></div>
+      </div>
+      <div class="hero-bottom">MAKE MEMORIES. HAVE FUN. REPEAT.</div>
+    </section>
+
+    <section class="gallery-strip" aria-label="Photo booth moments">
+      <img src="https://img1.wsimg.com/isteam/getty/2196960481" alt="Wedding guests celebrating" loading="lazy">
+      <img src="https://img1.wsimg.com/isteam/getty/1003458776" alt="Elegant wedding reception" loading="lazy">
+      <img src="https://img1.wsimg.com/isteam/getty/2196960704" alt="Party guests having fun" loading="lazy">
+    </section>
+
+    <section class="section features" id="features">
+      <div class="wrap"><div class="section-heading"><span class="eyebrow">MAKE IT MEMORABLE</span><h2>Interactive Photo Booths</h2><p>Instabooth Photo is a company dedicated to making your next event a hit with everyone. With the latest software, our booths will be customized specifically for your event.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card feature-photo"><div class="card-icon">▣</div><div><h3>Unlimited Prints</h3><p>Choose 4×6 prints or 2×6 photo strips, custom designed to suit your event.</p></div></article>
+          <article class="feature-card feature-pink"><div class="card-icon">✦</div><div><h3>Animated GIFs</h3><p>Create fun animated GIFs from the photos you take in the booth.</p></div></article>
+          <article class="feature-card feature-dark"><div class="card-icon">▶</div><div><h3>Video Messages</h3><p>Capture heartfelt messages and hilarious moments from your guests.</p></div></article>
+          <article class="feature-card feature-gallery"><div class="card-icon">◎</div><div><h3>Online Gallery</h3><p>Every shot, GIF and video message is saved to your own online gallery.</p></div></article>
+          <article class="feature-card feature-album"><div><strong>Albums</strong><h3>Photo Strip Album</h3><p>A keepsake album filled with your favorite photo booth strips.</p></div></article>
+          <article class="feature-card feature-360"><div><strong>360°</strong><h3>360 Video</h3><p>Make a splash with the 360 video booth experience.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing"><div class="pricing-shade"></div><div class="wrap pricing-inner">
+      <div class="section-heading light"><span class="eyebrow">PACKAGES &amp; PRICING</span><h2>Photo Booth Packages</h2><p>Choose your ideal package. We can also customize packages for special events. Day rates available for multi-day events.</p></div>
+      <div class="price-grid">
+        <article class="price-card"><p class="duration">4hr Minimum</p><h3>Wedding Package</h3><div class="price">$700</div><p class="price-description">Includes a booth technician, 4-hour minimum rental, optional location move and custom designs.</p><ul><li>Unlimited prints</li><li>4×6 or 2×6 strips</li><li>One custom background design</li><li>Custom wedding props</li><li>Animated GIFs</li><li>Social media sharing</li><li>Video messages</li></ul><a class="button button-outline" href="#booking" data-package="Wedding Package">More Info</a></article>
+        <article class="price-card popular"><span class="popular-label">Most Popular</span><p class="duration">3hr Minimum</p><h3>Event Package</h3><div class="price">$560</div><p class="price-description">Includes a booth technician, 3-hour minimum rental and custom designs.</p><ul><li>Unlimited prints</li><li>4×6 or 2×6 strips</li><li>One custom background design</li><li>Animated GIFs</li><li>Social media sharing</li><li>Standard photo booth props</li></ul><a class="button" href="#booking" data-package="Event Package">More Info</a></article>
+        <article class="price-card"><p class="duration">4hr Minimum</p><h3>360 Video Booth</h3><div class="price">$950</div><p class="price-description">360 video booth includes two booth technicians, 4-hour minimum rental and custom designs.</p><ul><li>Custom video frames</li><li>Online gallery with videos</li><li>One custom background design</li><li>Animated GIFs</li><li>Social media sharing</li><li>Lighting included</li></ul><a class="button button-outline" href="#booking" data-package="360 Video Booth">More Info</a></article>
+      </div>
+    </div></section>
+
+    <section class="booking" id="booking"><div class="booking-shade"></div><div class="wrap booking-inner"><div class="booking-intro"><span class="eyebrow">LET'S CELEBRATE</span><h2>Ready to make<br>some memories?</h2><p>Tell us a little about your event and we'll be in touch to help you find the perfect booth experience.</p><a href="tel:7862053985" class="contact-link">☎ &nbsp;786.205.3985</a><a href="mailto:info@instaboothphoto.com" class="contact-link">✉ &nbsp;info@instaboothphoto.com</a></div>
+      <div class="form-card"><p class="eyebrow">BOOKING INFO</p><h2>Book Your Booth Today!</h2>
+        <!-- Replace YOUR_FORMSPREE_ID with your form ID from https://formspree.io/ before publishing. -->
+        <form id="booking-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+          <div class="form-row"><label for="name">Name *</label><input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required></div>
+          <div class="form-row"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="Your phone number" autocomplete="tel"></div>
+          <div class="form-row"><label for="email">Email address *</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+          <div class="form-row"><label for="package">Interested in</label><select id="package" name="package"><option value="Not sure yet">Not sure yet</option><option>Wedding Package</option><option>Event Package</option><option>360 Video Booth</option></select></div>
+          <div class="form-row"><label for="message">Event details</label><textarea id="message" name="message" rows="4" placeholder="Event date, location, guest count, and anything else we should know"></textarea></div>
+          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="button submit-button" type="submit">Book Us <span>→</span></button>
+          <p class="form-note">Your information is only used to respond to your inquiry.</p><p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-grid"><div><a class="brand brand-footer" href="#top"><span class="brand-mark">i<span>•</span></span><span class="brand-name">instabooth <b>PHOTO</b></span></a><p>Making your next event a hit!</p><small>2016 © INSTABOOTH PHOTO™ All Rights Reserved.</small></div><div><h3>Quick Links</h3><a href="#top">Home</a><a href="#features">Features</a><a href="https://memoryfactory.smugmug.com/Instabooth-Photo/Instabooth-Photo" target="_blank" rel="noopener">Gallery</a><a href="#pricing">Pricing</a><a href="#booking">Book Us</a></div><div><h3>Contact</h3><a href="tel:7862053985">786.205.3985</a><a href="mailto:info@instaboothphoto.com">info@instaboothphoto.com</a><p>8865 SW 131 Street<br>Miami, FL 33176</p></div></div></footer>
+  <script src="assets/script.js"></script>
+</body>
 </html>
