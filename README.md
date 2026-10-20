@@ -51,10 +51,14 @@ The supplied `ibp web assets.zip` media has now been included locally in `assets
 - 360 booth demonstration video in the 360 Video feature card.
 - Additional supplied `primary.png`, `vertical.png`, and `features-corporate.png` are retained in the media folder for later use.
 
-Both videos autoplay muted and loop when browser settings permit; the 360 video is large (~48 MB), so optimize it if bandwidth or load speed is a concern. No remote image host is required for these sections. The Formspree ID still needs configuring.
+Both videos autoplay muted and loop when browser settings permit; the 360 video is large (~48 MB), so optimize it if bandwidth or load speed is a concern. No remote image host is required for these sections. The Formspree endpoint is configured: https://formspree.io/f/mwlvjabd.
 
 ## Carousel and hover interactions
 The photo gallery now includes an automatic 4.5-second carousel with arrows, pagination dots, touch swipe support, and pause on hover or keyboard focus. Gallery photos and the Interactive Photo Booth cards (including video backgrounds) gently zoom on hover. Reduced-motion preferences are respected.
 
 ## Preview locally
 From the `instabooth-github-pages` directory, run `python3 -m http.server 8000` and open `http://localhost:8000` in a browser. This is a local preview, not a publicly hosted URL.
+
+## Form connection troubleshooting
+
+The form action and JavaScript both point to `https://formspree.io/f/mwlvjabd`. The JavaScript file has a cache-busting version in `index.html` so visitors do not see the old “not connected” message. Upload **all** files from this build, replacing older files, and hard-refresh your browser. Confirm your Formspree account has activated this form and verified the recipient email.

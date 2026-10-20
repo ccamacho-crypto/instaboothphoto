@@ -35,3 +35,9 @@
 @media(max-width:900px){.carousel-slide{flex-basis:33.333333%}}
 @media(max-width:680px){.carousel-slide{flex-basis:75%;aspect-ratio:1.12}.carousel-arrow{width:37px;height:37px}.carousel-prev{left:9px}.carousel-next{right:9px}}
 @media(prefers-reduced-motion:reduce){.carousel-track,.carousel-slide img,.feature-card::before,.feature-video{transition:none!important}}
+
+/* Single outlined gallery link in header */
+.site-header .main-nav{display:flex;align-items:center;gap:0}
+.site-header .main-nav .event-gallery-link{display:inline-flex;align-items:center;justify-content:center;text-align:center;border:1px solid #111;border-radius:0;background:transparent;color:#111;padding:11px 17px;font-size:12px;font-weight:600;letter-spacing:.25px;line-height:1.35;transition:background-color .2s ease,color .2s ease}
+.site-header .main-nav .event-gallery-link:hover,.site-header .main-nav .event-gallery-link:focus-visible{background:#111;color:#fff}
+@media(max-width:680px){.site-header .main-nav{display:flex;position:static;flex-direction:row;align-items:center;box-shadow:none;background:transparent;padding:0}.site-header .main-nav .event-gallery-link{font-size:9px;padding:9px 10px;max-width:190px}.site-header .brand-logo{max-width:145px}}

@@ -66,12 +66,7 @@
   if (form && status) {
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      const action = form.getAttribute('action') || '';
-      if (action.includes('YOUR_FORMSPREE_ID')) {
-        status.className = 'form-status error';
-        status.textContent = 'The booking form is not connected yet. Please contact info@instaboothphoto.com or call 786.205.3985.';
-        return;
-      }
+      const action = 'https://formspree.io/f/mwlvjabd';
       const button = form.querySelector('button[type="submit"]');
       const original = button.textContent;
       button.disabled = true; button.textContent = 'Sending…'; status.className = 'form-status'; status.textContent = '';
