@@ -9,17 +9,11 @@ A static rebuild of the Instabooth Photo homepage, based on the supplied Airo Re
 - `assets/script.js` — mobile navigation, package selection, and form submission
 - `assets/favicon.svg` — simple local favicon
 
-## Before publishing: connect the booking form
+## Booking form — configured
 
-GitHub Pages serves static files; it cannot run the original `/api/contact/contact` server endpoint. This version is prepared for Formspree:
+The booking form is configured to submit to **https://formspree.io/f/mwlvjabd** using Formspree's endpoint. No additional code changes are required.
 
-1. Create a form at [Formspree](https://formspree.io/) and verify the destination email address.
-2. Copy the form endpoint, which looks like `https://formspree.io/f/abcdefgh`.
-3. Open `index.html` and find `https://formspree.io/f/YOUR_FORMSPREE_ID`.
-4. Replace `YOUR_FORMSPREE_ID` with the ID Formspree assigned to your form. Keep the full `https://formspree.io/f/` prefix.
-5. Submit a test inquiry after deployment and confirm it arrives. Check Formspree's dashboard for any verification or spam settings that need attention.
-
-Until the endpoint is configured, the form deliberately shows a message directing visitors to the published phone and email contacts rather than pretending the inquiry was sent.
+After deployment, submit a test inquiry and confirm it appears in your Formspree dashboard and reaches your configured notification email. Verify the email destination and any Formspree activation or spam settings in your Formspree account. The site displays a success message only after Formspree returns a successful response.
 
 ## Publish with GitHub Pages
 
