@@ -65,3 +65,6 @@ The form action and JavaScript both point to `https://formspree.io/f/mwlvjabd`. 
 
 ## Header update
 The navigation bar includes the outlined event gallery link, clickable phone number (786.205.3985), email (info@instaboothphoto.com), and pink Book Us button linked to the booking form. The street address remains removed.
+
+## Responsive navigation update
+The phone number, email, and pink Book Us button are spaced out on wide screens and collapse into a hamburger menu at 1100px and below. The outlined event gallery link stays visible and now has subtly rounded corners.

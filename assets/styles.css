@@ -53,3 +53,32 @@
 @media(max-width:1050px){.site-header{padding-inline:20px}.site-header .main-nav{gap:12px}.site-header .main-nav .event-gallery-link{padding:9px 11px;font-size:10px}.site-header .main-nav .nav-contact a{font-size:11px}.site-header .main-nav .nav-cta{padding:10px 16px}}
 @media(max-width:760px){.site-header{height:auto;min-height:76px;flex-wrap:wrap;justify-content:center;padding:12px 16px;gap:12px}.site-header .main-nav{position:static;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin-left:0;padding:0;box-shadow:none;background:transparent}.site-header .main-nav .nav-contact{align-items:center}.site-header .main-nav .event-gallery-link{max-width:none;font-size:10px}.site-header .brand-logo{max-width:170px}.site-header .main-nav .nav-cta{padding:10px 16px}}
 @media(max-width:420px){.site-header .main-nav{gap:10px}.site-header .main-nav .nav-contact{order:3;width:100%;flex-direction:row;justify-content:center;flex-wrap:wrap;column-gap:14px}.site-header .main-nav .nav-contact a{font-size:10px}}
+
+/* Responsive contact menu: gallery remains visible at every width. */
+.site-header .main-nav{display:flex;align-items:center;gap:20px;flex-wrap:nowrap;margin-left:auto;min-width:0}
+.site-header .main-nav .event-gallery-link{border-radius:6px;flex-shrink:0}
+.site-header .main-nav .nav-collapsible{display:flex;align-items:center;gap:34px}
+.site-header .main-nav .nav-contact{display:flex;flex-direction:column;align-items:flex-start;gap:4px;white-space:nowrap}
+.site-header .main-nav .nav-cta{margin-left:4px}
+.site-header .main-nav .menu-toggle{display:none}
+@media(max-width:1100px){
+  .site-header{position:relative;display:flex;justify-content:space-between;align-items:center;flex-wrap:nowrap;gap:12px;padding:12px 20px;min-height:76px;height:auto}
+  .site-header .brand-logo{width:180px;max-width:100%;height:auto}
+  .site-header .main-nav{display:flex;position:static;flex-direction:row;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:nowrap;margin-left:auto;padding:0;background:transparent;box-shadow:none;width:auto;min-width:0}
+  .site-header .main-nav .event-gallery-link{display:inline-flex;font-size:10px;padding:9px 12px;max-width:none}
+  .site-header .main-nav .menu-toggle{display:inline-flex;justify-content:center;align-items:center;flex-shrink:0;width:42px;height:42px;border:1px solid #222;border-radius:6px;background:white;color:#111;font-size:22px;line-height:1;cursor:pointer}
+  .site-header .main-nav .menu-toggle:hover,.site-header .main-nav .menu-toggle:focus-visible{background:#f7f7f7}
+  .site-header .main-nav .nav-collapsible{display:none;position:absolute;top:100%;right:16px;z-index:100;width:min(310px,calc(100vw - 32px));padding:22px;background:#fff;border:1px solid #e5e5e5;border-radius:10px;box-shadow:0 12px 32px #0002;flex-direction:column;align-items:stretch;gap:22px}
+  .site-header .main-nav .nav-collapsible.open{display:flex}
+  .site-header .main-nav .nav-collapsible .nav-contact{display:flex;flex-direction:column;align-items:flex-start;gap:12px;width:auto;order:initial}
+  .site-header .main-nav .nav-collapsible .nav-contact a{font-size:13px}
+  .site-header .main-nav .nav-collapsible .nav-cta{display:block;text-align:center;margin:0;padding:13px 20px;font-size:13px}
+}
+@media(max-width:520px){
+  .site-header{padding:12px 10px;gap:5px}
+  .site-header .brand-logo{width:118px;max-height:46px}
+  .site-header .main-nav{gap:7px}
+  .site-header .main-nav .event-gallery-link{font-size:8px;padding:8px 7px;max-width:155px;line-height:1.2}
+  .site-header .main-nav .menu-toggle{width:36px;height:36px;font-size:19px}
+}
+@media(max-width:355px){.site-header .brand-logo{width:90px}.site-header .main-nav .event-gallery-link{max-width:137px;font-size:7px}}
