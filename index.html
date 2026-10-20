@@ -35,13 +35,20 @@
       <div class="hero-bottom">MAKE MEMORIES. HAVE FUN. REPEAT.</div>
     </section>
 
-    <section class="gallery-strip" aria-label="Photo booth moments">
-      <img src="assets/media/gallery-slide-1.jpg" alt="Instabooth event gallery photo 1" loading="lazy">
-      <img src="assets/media/gallery-slide-2.jpg" alt="Instabooth event gallery photo 2" loading="lazy">
-      <img src="assets/media/gallery-slide-3.jpg" alt="Instabooth event gallery photo 3" loading="lazy">
-      <img src="assets/media/gallery-slide-4.jpg" alt="Instabooth event gallery photo 4" loading="lazy">
-      <img src="assets/media/gallery-slide-5.jpg" alt="Instabooth event gallery photo 5" loading="lazy">
-      <img src="assets/media/gallery-slide-6.jpg" alt="Instabooth event gallery photo 6" loading="lazy">
+    <section class="gallery-carousel" aria-label="Photo booth moments" aria-roledescription="carousel">
+      <div class="carousel-viewport" id="gallery-viewport">
+        <div class="carousel-track" id="gallery-track">
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 6"><img src="assets/media/gallery-slide-1.jpg" alt="Instabooth event gallery photo 1" loading="lazy"></div>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 6"><img src="assets/media/gallery-slide-2.jpg" alt="Instabooth event gallery photo 2" loading="lazy"></div>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 6"><img src="assets/media/gallery-slide-3.jpg" alt="Instabooth event gallery photo 3" loading="lazy"></div>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 6"><img src="assets/media/gallery-slide-4.jpg" alt="Instabooth event gallery photo 4" loading="lazy"></div>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 6"><img src="assets/media/gallery-slide-5.jpg" alt="Instabooth event gallery photo 5" loading="lazy"></div>
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 of 6"><img src="assets/media/gallery-slide-6.jpg" alt="Instabooth event gallery photo 6" loading="lazy"></div>
+        </div>
+      </div>
+      <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous gallery images">&#10094;</button>
+      <button class="carousel-arrow carousel-next" type="button" aria-label="Next gallery images">&#10095;</button>
+      <div class="carousel-dots" aria-label="Choose gallery slide"></div>
     </section>
 
     <section class="section features" id="features">

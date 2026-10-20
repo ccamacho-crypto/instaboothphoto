@@ -59,3 +59,9 @@ The supplied `ibp web assets.zip` media has now been included locally in `assets
 - Additional supplied `primary.png`, `vertical.png`, and `features-corporate.png` are retained in the media folder for later use.
 
 Both videos autoplay muted and loop when browser settings permit; the 360 video is large (~48 MB), so optimize it if bandwidth or load speed is a concern. No remote image host is required for these sections. The Formspree ID still needs configuring.
+
+## Carousel and hover interactions
+The photo gallery now includes an automatic 4.5-second carousel with arrows, pagination dots, touch swipe support, and pause on hover or keyboard focus. Gallery photos and the Interactive Photo Booth cards (including video backgrounds) gently zoom on hover. Reduced-motion preferences are respected.
+
+## Preview locally
+From the `instabooth-github-pages` directory, run `python3 -m http.server 8000` and open `http://localhost:8000` in a browser. This is a local preview, not a publicly hosted URL.
