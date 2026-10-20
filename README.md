@@ -62,3 +62,6 @@ From the `instabooth-github-pages` directory, run `python3 -m http.server 8000` 
 ## Form connection troubleshooting
 
 The form action and JavaScript both point to `https://formspree.io/f/mwlvjabd`. The JavaScript file has a cache-busting version in `index.html` so visitors do not see the old “not connected” message. Upload **all** files from this build, replacing older files, and hard-refresh your browser. Confirm your Formspree account has activated this form and verified the recipient email.
+
+## Header update
+The navigation bar includes the outlined event gallery link, clickable phone number (786.205.3985), email (info@instaboothphoto.com), and pink Book Us button linked to the booking form. The street address remains removed.
