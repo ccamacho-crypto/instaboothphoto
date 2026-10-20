@@ -34,7 +34,6 @@ The ZIP included references to Airo-hosted image/video assets, but those binary 
 
 - Phone: 786.205.3985
 - Email: info@instaboothphoto.com
-- Address: 8865 SW 131 Street, Miami, FL 33176
 - Wedding Package: $700 (4-hour minimum)
 - Event Package: $560 (3-hour minimum)
 - 360 Video Booth: $950 (4-hour minimum)
