@@ -75,6 +75,12 @@
       const formId = new URL(form.action).pathname.split('/').filter(Boolean).pop();
       const button = form.querySelector('button[type="submit"]');
       const original = button.textContent;
+      const tokenField = form.querySelector('input[name="cf-turnstile-response"]');
+      if (!tokenField || !tokenField.value) {
+        status.className = 'form-status error';
+        status.textContent = 'Please wait for the security check to finish, then try again.';
+        return;
+      }
       button.disabled = true; button.textContent = 'Sending…'; status.className = 'form-status'; status.textContent = '';
       try {
         if (typeof Forminit === 'undefined') throw new Error('Could not submit the form. Please try again or email info@instaboothphoto.com.');
@@ -85,7 +91,10 @@
         form.reset(); status.textContent = 'Thank you! Your inquiry has been sent. We’ll be in touch soon.';
       } catch (error) {
         status.className = 'form-status error'; status.textContent = error.message || 'Something went wrong. Please email info@instaboothphoto.com.';
-      } finally { button.disabled = false; button.textContent = original; }
+      } finally {
+        button.disabled = false; button.textContent = original;
+        if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
+      }
     });
   }
 })();
