@@ -72,13 +72,16 @@
   if (form && status) {
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      const action = 'https://formspree.io/f/mwlvjabd';
+      const formId = new URL(form.action).pathname.split('/').filter(Boolean).pop();
       const button = form.querySelector('button[type="submit"]');
       const original = button.textContent;
       button.disabled = true; button.textContent = 'Sending…'; status.className = 'form-status'; status.textContent = '';
       try {
-        const response = await fetch(action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-        if (!response.ok) throw new Error('Could not submit the form. Please try again or email us directly.');
+        if (typeof Forminit === 'undefined') throw new Error('Could not submit the form. Please try again or email info@instaboothphoto.com.');
+        const data = new FormData(form);
+        if (!data.get('fi-date-event_date')) data.delete('fi-date-event_date');
+        const { error } = await new Forminit().submit(formId, data);
+        if (error) throw new Error('Could not submit the form. Please try again or email us directly.');
         form.reset(); status.textContent = 'Thank you! Your inquiry has been sent. We’ll be in touch soon.';
       } catch (error) {
         status.className = 'form-status error'; status.textContent = error.message || 'Something went wrong. Please email info@instaboothphoto.com.';
