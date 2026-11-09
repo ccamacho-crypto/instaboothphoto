@@ -9,11 +9,13 @@ A static rebuild of the Instabooth Photo homepage, based on the supplied Airo Re
 - `assets/script.js` — mobile navigation, package selection, and form submission
 - `assets/favicon.svg` — simple local favicon
 
-## Booking form — configured
+## Booking form — Forminit with spam protection
 
-The booking form is configured to submit to **https://formspree.io/f/mwlvjabd** using Formspree's endpoint. No additional code changes are required.
+The booking form submits through the Forminit SDK to **https://forminit.com/f/9lf429ia29p**. Spam protection has two layers: a hidden honeypot field (`_gotcha`) and a Cloudflare Turnstile widget. The Turnstile Site Key is public and lives in `index.html`. The Turnstile Secret Key must only ever be saved in Forminit under Form Settings > CAPTCHA, never in this repository.
 
-After deployment, submit a test inquiry and confirm it appears in your Formspree dashboard and reaches your configured notification email. Verify the email destination and any Formspree activation or spam settings in your Formspree account. The site displays a success message only after Formspree returns a successful response.
+The page blocks submission until Turnstile issues a token (`cf-turnstile-response`). Forminit checks that token only after the Secret Key is saved there. Check the form's Spam folder in Forminit now and then for real inquiries that were filtered.
+
+Note: the older Formspree notes below are historical and no longer apply.
 
 ## Publish with GitHub Pages
 
